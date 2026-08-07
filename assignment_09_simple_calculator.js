@@ -75,3 +75,88 @@
 // =============================================================================
 
 
+const readlineSync = require('readline-sync');
+
+function add(a, b) {
+    return a + b;
+}
+
+function subtract(a, b) {
+    return a - b;
+}
+
+function multiply(a, b) {
+    return a * b;
+}
+
+function divide(a, b) {
+    if (b === 0) {
+        return null;
+    }
+    return a / b;
+}
+
+function modulus(a, b) {
+    return a % b;
+}
+
+function power(a, b) {
+    return a ** b;
+}
+
+function main() {
+    while (true) {
+        console.log("============================");
+        console.log("     SIMPLE CALCULATOR");
+        console.log("============================");
+        console.log("1. Addition");
+        console.log("2. Subtraction");
+        console.log("3. Multiplication");
+        console.log("4. Division");
+        console.log("5. Modulus");
+        console.log("6. Exponentiation");
+        console.log("7. Quit");
+        const choice = readlineSync.question("Select an operation (1-7): ");
+
+        if (choice === "7") {
+            console.log("Goodbye!");
+            break;
+        }
+
+        if (["1", "2", "3", "4", "5", "6"].includes(choice)) {
+            const a = readlineSync.questionFloat("Enter first number : ");
+            const b = readlineSync.questionFloat("Enter second number: ");
+            let result, symbol;
+
+            if (choice === "1") {
+                result = add(a, b);
+                symbol = "+";
+            } else if (choice === "2") {
+                result = subtract(a, b);
+                symbol = "-";
+            } else if (choice === "3") {
+                result = multiply(a, b);
+                symbol = "*";
+            } else if (choice === "4") {
+                result = divide(a, b);
+                symbol = "/";
+            } else if (choice === "5") {
+                result = modulus(a, b);
+                symbol = "%";
+            } else {
+                result = power(a, b);
+                symbol = "**";
+            }
+
+            if (result === null) {
+                console.log("Error: Cannot divide by zero.");
+            } else {
+                console.log("Result: " + a + " " + symbol + " " + b + " = " + result.toFixed(2));
+            }
+        } else {
+            console.log("Error: Please select a number from 1 to 7.");
+        }
+    }
+}
+
+main();
